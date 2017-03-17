@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VueAdmin</title>
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+  <div id="app">
+    <nav class="sidebar" v-if="isLoggedIn">
+      <strong class="brand">VueAdmin</strong>
+      <router-link to="/" exact>Dashboard</router-link>
+      <router-link to="/orders" v-if="canOrders">Orders</router-link>
+      <div class="me">{{ user.name }} <span class="muted">{{ user.role }}{{ user.region ? ' · ' + user.region : '' }}</span>
+        <button class="link" @click="logout">Sign out</button></div>
+    </nav>
+    <main :class="{ full: !isLoggedIn }"><router-view></router-view></main>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuex@3.6.2/dist/vuex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-router@3.6.5/dist/vue-router.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="/js/store.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
